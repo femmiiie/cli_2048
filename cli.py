@@ -15,3 +15,7 @@ def intro()->None:
     print(" s: down")
     print(" d: right")
     sleep(3)
+
+
+def loop()->None:
+    pass
