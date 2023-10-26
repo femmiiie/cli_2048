@@ -27,4 +27,5 @@ def loop(board:Board)->None:
         update(board.board)
         board.advance_state()
         update(board.board)
+        print("Post-Move:\n")
         sleep(1)
