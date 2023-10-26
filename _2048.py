@@ -11,10 +11,10 @@ class Board:
 
         self.init_board()
         self.actdict = {
-            'w' : self.up_move(),
-            'a' : self.left_move(),
-            's' : self.down_move(),
-            'd' : self.right_move()
+            'w' : self.up_move,
+            'a' : self.left_move,
+            's' : self.down_move,
+            'd' : self.right_move
         }
 
 
@@ -54,8 +54,21 @@ class Board:
 
 #Handlers for all 4 move types
     def left_move(self):
-        pass
+        for i in range(1, 4):
+            for j in range(0, 3):
+                if self.board[j][i-1] == 0:
+                    self.board[j][i-1], self.board[j][i] = self.board[j][i], self.board[j][i-1]
+                elif self.board[j][i-1] == self.board[j][i]:
+                    self.board[j][i-1] *= 2
+                    self.board[j][i] = 0
 
+        # for row in self.board:
+        #     for i in range(len(row)):    
+        #         if row[i] == row[i+1]:
+        #             row[i], row[i+1] = row[0]*2, 0
+        #         row.remove(0)
+        #         row.append(0)
+            
 
     def right_move(self):
         pass
@@ -77,6 +90,8 @@ class Board:
                 exit()
         return False
     
+    #Simply checks if all of the tiles are taken up
+    #Plan to make this more thorough
     def check_loss(self)->bool:
         for i in self.board:
             if 0 in i:
@@ -96,12 +111,15 @@ class Board:
         while True:
             opt = input("Choose an action: ")
             try:
-                self.actdict[opt]
+                self.actdict[opt]()
+                print()
                 return
             except:
                 print("Invalid Move!")
+        
 
-def main():
+
+def game_init():
     #intialize board
     board = Board(1234)
     
@@ -122,6 +140,6 @@ def main():
     game.loop(board)
 
 if __name__ == "__main__":
-    main()
+    game_init()
 
     
